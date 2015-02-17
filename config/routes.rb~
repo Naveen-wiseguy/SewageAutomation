@@ -11,7 +11,7 @@ SewAuto::Application.routes.draw do
   
 resources :treatment_plants, controller: 'treatment_plant', only: [:new, :create,:show, :index]
 
-root 'treatment_plant#index'
+root treatment_plants_
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

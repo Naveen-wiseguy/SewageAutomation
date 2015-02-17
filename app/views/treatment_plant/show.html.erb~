@@ -1,0 +1,20 @@
+<h1> Sewage Treatment Plant ID : <%= @tp.id %> </h1>
+Volume :<%= @tp.volume %> <br>
+Capacity :<%= @tp.capacity %> <br>
+<% if @tp.alert then str="ON" else str="OFF" %>
+Alert : <%= str %>
+
+<br>
+Pumping Stations :
+<table>
+ <tr> <th> ID</th> <th>Capacity</th> <th>Volume</th> <th>Location</th> <th>Priority</th> <th>Outlet Valve</th> <th>Second valve </th> </tr>
+<% @tp.pumping_stations.each do |p| %>
+<tr>
+ <td><%= p.id %> </td>
+ <td><%= p.capacity %> </td>
+ <td><%= p.volume %> </td>
+ <td><%= p.location %> </td>
+ <td><%= p.priority %> </td>
+ <td><%= p.valve_open %> </td>
+ <td><%= p.second_valve_open %> </td>
+</tr>

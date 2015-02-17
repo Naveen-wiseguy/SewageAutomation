@@ -1,0 +1,5 @@
+class AddCapacityToPumpingStation < ActiveRecord::Migration
+  def change
+    add_column :pumping_stations, :capacity, :integer
+  end
+end

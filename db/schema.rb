@@ -11,22 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216160640) do
+ActiveRecord::Schema.define(version: 20150217161428) do
 
   create_table "pumping_stations", force: true do |t|
-    t.integer  "height"
-    t.boolean  "valve"
+    t.integer  "volume"
+    t.boolean  "valve_open"
     t.string   "location"
     t.integer  "priority"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "capacity"
+    t.boolean  "alert"
+    t.boolean  "second_valve_open"
   end
 
   create_table "treatment_plants", force: true do |t|
-    t.integer  "height"
-    t.boolean  "valve_open"
+    t.integer  "volume"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "capacity"
+    t.boolean  "alert"
   end
 
 end

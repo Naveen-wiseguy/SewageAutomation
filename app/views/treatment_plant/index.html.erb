@@ -1,0 +1,6 @@
+<h1> All the Sewage Treatments plants </h1>
+
+<% @tps.each do |plant| %>
+ <%= render treatment_plant_path(plant.id) %>
+
+<% end %>
