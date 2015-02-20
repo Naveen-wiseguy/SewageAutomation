@@ -17,4 +17,5 @@ class UserController < ApplicationController
 
  def logout
     session[:loggedin]=false
+ end
 end

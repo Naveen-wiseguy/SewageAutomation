@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217161428) do
+ActiveRecord::Schema.define(version: 20150218180931) do
 
   create_table "pumping_stations", force: true do |t|
     t.integer  "volume"
@@ -23,7 +23,10 @@ ActiveRecord::Schema.define(version: 20150217161428) do
     t.integer  "capacity"
     t.boolean  "alert"
     t.boolean  "second_valve_open"
+    t.integer  "treatment_plant_id"
   end
+
+  add_index "pumping_stations", ["treatment_plant_id"], name: "index_pumping_stations_on_treatment_plant_id"
 
   create_table "treatment_plants", force: true do |t|
     t.integer  "volume"

@@ -1,0 +1,3 @@
+<h1>Sewage Treatment plant </h1>
+
+<%=render @tp %>

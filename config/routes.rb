@@ -9,9 +9,11 @@ SewAuto::Application.routes.draw do
   #get 'treatment_plants/:id' => 'treatment_plant#show', as: :treatment_plant
   #get 'treatment_plants/new' => 'treatment_plant#new', as: :new_treatment_plant
   
-resources :treatment_plants, controller: 'treatment_plant', only: [:new, :create,:show, :index]
+resources :treatment_plants, only: [:new, :create,:show, :index] do
+  resources :pumping_stations, only: [:new,:create]
+end
 
-root 'treatment_plant#index'
+root 'treatment_plants#index'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

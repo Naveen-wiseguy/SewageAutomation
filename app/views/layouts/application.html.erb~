@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if session[:loggedin]==true then %>
+<% if session[:loggedin] then %>
  <%= link_to "Logout", action: "logout", method: "post" %>
 <% end %>
 <% flash.each do |message_type,message | %>
