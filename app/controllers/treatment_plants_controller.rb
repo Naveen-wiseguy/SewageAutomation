@@ -28,7 +28,7 @@ skip_before_action :verify_authenticity_token
 	CSV.foreach(inputPath) do |row|
 	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
 	  @treatment_plant.update(volume: row[1].to_i)
-	  render text: "OK"
+	  render text: "OK \n #{row[0]} \n #{row[1]}"
 	end
     end
   end
