@@ -31,7 +31,7 @@ skip_before_action :verify_authenticity_token
 	  render text: "OK \n new line #{row[0]} \n #{row[1]}"
 	 end
     else render text: "Nothing !"
-    render text: "#{request.body.raw_post()}"
+    render text: "#{request.raw_post()}"
 	
     end
   end
