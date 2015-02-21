@@ -18,15 +18,14 @@ class PumpingStationsController < ApplicationController
  end
 
   def update
-    if request.put? && params[:file].present? then
-	inputPath=params[:file].path
-	CSV.foreach(inputPath) do |row|
+    if request.put? && then
+	#inputPath=params[:file].path
+	CSV.parse(request.raw_post()) do |row|
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
+	  render "OK"
 	end
-	respond_to do |format|
-	  format.text  {render text: "OK" }
-	end
+    else  render text: "Nothing !#{request.raw_post()}"
     end
   end
 

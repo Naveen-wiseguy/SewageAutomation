@@ -25,7 +25,7 @@ skip_before_action :verify_authenticity_token
   def update
     if request.put? then
 	#inputPath=params[:file].path
-	CSV.foreach(request.raw_post()) do |row|
+	CSV.parse(request.raw_post()) do |row|
 	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
 	  @treatment_plant.update(volume: row[1].to_i)
 	  render text: "OK \n #{row[0]} \n #{row[1]}"
