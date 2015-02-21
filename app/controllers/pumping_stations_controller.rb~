@@ -21,8 +21,8 @@ class PumpingStationsController < ApplicationController
     if request.put? && params[:file].present? then
 	inputPath=params[:file].path
 	CSV.foreach(inputPath) do |row|
-	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
-	  @treatment_plant.update(volume: row[1].to_i)
+	  @pumping_station=PumpingStation.find(row[0].to_i)
+	  @pumping_station.update(volume: row[1].to_i)
 	render plain: "OK"
     end
   end

@@ -23,6 +23,7 @@ class PumpingStationsController < ApplicationController
 	CSV.foreach(inputPath) do |row|
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
+	end
 	render plain: "OK"
     end
   end
