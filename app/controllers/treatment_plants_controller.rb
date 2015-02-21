@@ -30,7 +30,8 @@ skip_before_action :verify_authenticity_token
 	  @treatment_plant.update(volume: row[1].to_i)
 	  render text: "OK \n new line #{row[0]} \n #{row[1]}"
 	 end
-    else render text: "Nothing !"	
+    else render text: "Nothing !"
+    render text: "#{request.body.raw_post()}"
 	
     end
   end
