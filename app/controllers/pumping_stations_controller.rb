@@ -24,9 +24,6 @@ class PumpingStationsController < ApplicationController
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
 	end
-	respond_to do |format|
-	  format.text  {render text: "OK" }
-	end
     end
   end
 
