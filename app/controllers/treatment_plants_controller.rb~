@@ -29,7 +29,7 @@ skip_before_action :verify_authenticity_token
 	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
 	  @treatment_plant.update(volume: row[1].to_i)
 	end
-	render plain: "OK"
+	render text: "OK"
     end
   end
 
