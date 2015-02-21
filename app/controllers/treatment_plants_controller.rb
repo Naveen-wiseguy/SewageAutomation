@@ -1,3 +1,4 @@
+    require 'csv'
 class TreatmentPlantsController < ApplicationController
 skip_before_action :verify_authenticity_token
   def new
@@ -19,6 +20,16 @@ skip_before_action :verify_authenticity_token
 
   def index
     @treatment_plants=TreatmentPlant.all
+  end
+
+  def update
+    if request.put? && params[:file].present? then
+	inputPath=params[:file].path
+	CSV.foreach(inputPath) do |row|
+	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
+	  @treatment_plant.update(volume: row[1].to_i)
+	render plain: "OK"
+    end
   end
 
   def tp_params

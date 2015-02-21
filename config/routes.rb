@@ -13,7 +13,11 @@ resources :treatment_plants, only: [:new, :create,:show, :index] do
   resources :pumping_stations, only: [:new,:create]
 end
 
+
 root 'treatment_plants#index'
+
+put '/treatment_plants' => 'treatment_plants#update'
+put '/pumping_stations' => 'pumping_stations#update'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
