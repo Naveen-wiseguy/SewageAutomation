@@ -1,5 +1,5 @@
 class PumpingStationsController < ApplicationController
-
+skip_before_action :verify_authenticity_token
  def new
     @treatment_plant=TreatmentPlant.find(params[:treatment_plant_id])
     @pumping_station=@treatment_plant.pumping_stations.build
@@ -18,7 +18,7 @@ class PumpingStationsController < ApplicationController
  end
 
   def update
-    if request.put? && then
+    if request.put? then
 	#inputPath=params[:file].path
 	CSV.parse(request.raw_post()) do |row|
 	  @pumping_station=PumpingStation.find(row[0].to_i)

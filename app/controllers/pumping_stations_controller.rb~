@@ -1,5 +1,5 @@
 class PumpingStationsController < ApplicationController
-
+skip_before_action :verify_authenticity_token
  def new
     @treatment_plant=TreatmentPlant.find(params[:treatment_plant_id])
     @pumping_station=@treatment_plant.pumping_stations.build
