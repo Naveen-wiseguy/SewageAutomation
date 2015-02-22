@@ -23,8 +23,8 @@ skip_before_action :verify_authenticity_token
 	CSV.parse(request.raw_post()) do |row|
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
-	  processing
-	  render text: "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}"
+	  m=processing
+	  render text: "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}\n#{m}"
 	end
     else  render text: "Nothing !#{request.raw_post()}"
     end
@@ -45,7 +45,7 @@ skip_before_action :verify_authenticity_token
      else
        @pumping_station.update(alert: false)
        if @pumping_station.second_valve_open
-         @pumping_station.update(second_valve_open: true)
+         @pumping_station.update(second_valve_open: false)
      end
      max=0
      max_id=0
@@ -57,13 +57,14 @@ skip_before_action :verify_authenticity_token
        end
      end
      @treatment_plant.pumping_stations.each do |station|
-       pri=station.priority*2-(station.capacity-station.volume)
+      # pri=station.priority*2-(station.capacity-station.volume)
        if station.id==max_id
         station.update(valve_open: true)
        else
-        station.valve_open=false
-       end
+        station.update(valve_open: false)
+      end
      end
+     return max_id
    end
  end
 end
