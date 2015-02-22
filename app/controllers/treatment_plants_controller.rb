@@ -28,6 +28,7 @@ skip_before_action :verify_authenticity_token
 	CSV.parse(request.raw_post()) do |row|
 	  @treatment_plant=TreatmentPlant.find(row[0].to_i)
 	  @treatment_plant.update(volume: row[1].to_i)
+	  process
 	  render text: "OK"
 	 end
     else render text: "Nothing !#{request.raw_post()}"
@@ -38,4 +39,20 @@ skip_before_action :verify_authenticity_token
   def tp_params
     params.require(:treatment_plant).permit(:volume,:capacity,:alert)
   end
+
+ def process
+  percent=((@treatment_plant.capacity-@treatment_plant.volume)/@treatment_plant.capacity).to_f
+  percent=percent*100
+  if(percent>=90) then
+    @treatment_plant.update(alert: true)
+    reservoir()
+  end
+ end
+
+ def reservoir
+   @treatment_plant.pumping_stations.each do |station|
+     station.update(valve_open: false)
+     station.second_valve_open=true if station.alert
+   end
+ end
 end
