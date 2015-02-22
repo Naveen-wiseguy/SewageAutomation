@@ -24,7 +24,7 @@ skip_before_action :verify_authenticity_token
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
 	  processing
-	  render "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}"
+	  render text: "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}"
 	end
     else  render text: "Nothing !#{request.raw_post()}"
     end

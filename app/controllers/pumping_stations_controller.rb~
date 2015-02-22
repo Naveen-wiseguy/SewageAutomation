@@ -35,6 +35,7 @@ skip_before_action :verify_authenticity_token
  end
 
  def processing
+   @treatment_plant=TreatmentPlant.find(@pumping_station.treatment_plant_id)
    if @treatment_plant.alert then return end
    else
      percent=((@pumping_station.capacity-@pumping_station.volume)/@pumping_station.capacity).to_f
