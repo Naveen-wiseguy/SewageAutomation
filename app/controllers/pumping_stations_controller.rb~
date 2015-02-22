@@ -39,9 +39,8 @@ skip_before_action :verify_authenticity_token
    else
      percent=((@pumping_station.capacity-@pumping_station.volume)/@pumping_station.capacity).to_f
      percent=percent*100
-     if percent>=90 then
+     if percent>=90
        @pumping_station.update(alert: true)
-     end
      else
        @pumping_station.update(alert: false)
        if @pumping_station.second_valve_open
