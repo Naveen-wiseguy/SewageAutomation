@@ -47,8 +47,8 @@ skip_before_action :verify_authenticity_token
        if @pumping_station.second_valve_open
          @pumping_station.update(second_valve_open: false)
      end
-     max=0
-     max_id=5
+     max=-500
+     max_id=0
      @treatment_plant.pumping_stations.each do |station|
        pri=station.priority*2-(station.capacity-station.volume)
        if pri>max then

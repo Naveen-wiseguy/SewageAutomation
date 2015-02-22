@@ -1,16 +1,17 @@
-<h2> Sewage Treatment Plant ID : <%= @treatment_plant.id %> </h2>
-Volume :<%= @treatment_plant.volume %> <br>
-Capacity :<%= @treatment_plant.capacity %> <br>
-<% if @treatment_plant.alert then str="ON" else str="OFF" end %>
+<h2> Sewage Treatment Plant ID : <%= treatment_plant.id %> </h2>
+Volume :<%= treatment_plant.volume %> <br>
+Capacity :<%= treatment_plant.capacity %> <br>
+<% if treatment_plant.alert then str="ON" else str="OFF" end %>
 Alert : <%= str %>
 
 <br>
 Pumping Stations :
 <table border="2">
- <tr> <th> ID</th> <th>Capacity</th> <th>Volume</th> <th>Location</th> <th>Priority</th> <th>Outlet Valve</th> <th>Second valve </th> <th>Alert</th> </tr>
-<% @treatment_plant.pumping_stations.each do |p| %>
+ <tr> <th>belongs to </th><th> ID</th> <th>Capacity</th> <th>Volume</th> <th>Location</th> <th>Priority</th> <th>Outlet Valve</th> <th>Second valve </th> <th>Alert</th> </tr>
+<% treatment_plant.pumping_stations.each do |p| %>
 <% if p.alert then str="ON" else str="OFF" end %>
 <tr>
+ <td><%= p.treatment_plant_id %>
  <td><%= p.id %> </td>
  <td><%= p.capacity %> </td>
  <td><%= p.volume %> </td>
