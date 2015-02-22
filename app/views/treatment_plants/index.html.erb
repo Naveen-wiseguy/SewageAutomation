@@ -1,6 +1,6 @@
 <h1> All the Sewage Treatments plants </h1>
 
-<% @treatment_plants.each do |plant| %>
- <%= link_to "Plant #{plant.id}" ,treatment_plant_path(plant) %>
-
-<% end %>
+<% #@treatment_plants.each do |plant| %>
+ <% #link_to "Plant #{plant.id}" ,treatment_plant_path(plant) %>
+ <%= render @treatment_plants %>
+<% #end %>

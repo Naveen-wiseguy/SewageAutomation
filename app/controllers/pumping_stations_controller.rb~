@@ -57,9 +57,8 @@ skip_before_action :verify_authenticity_token
      end
      @treatment_plant.pumping_stations.each do |station|
        pri=station.priority*2-(station.capacity-station.volume)
-       if station.id==maxid then
+       if station.id==maxid
         station.update(valve_open: true)
-       end
        else
         station.valve_open=false
        end

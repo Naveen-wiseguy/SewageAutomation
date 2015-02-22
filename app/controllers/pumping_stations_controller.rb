@@ -23,7 +23,7 @@ skip_before_action :verify_authenticity_token
 	CSV.parse(request.raw_post()) do |row|
 	  @pumping_station=PumpingStation.find(row[0].to_i)
 	  @pumping_station.update(volume: row[1].to_i)
-	  process()
+	  processing()
 	  render "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}"
 	end
     else  render text: "Nothing !#{request.raw_post()}"
@@ -34,7 +34,7 @@ skip_before_action :verify_authenticity_token
     params.require(:pumping_station).permit(:volume,:valve_open,:location,:priority,:capacity,:alert,:second_valve_open)
  end
 
- def process
+ def processing
    if @treatment_plant.alert then return end
    else
      percent=((@pumping_station.capacity-@pumping_station.volume)/@pumping_station.capacity).to_f

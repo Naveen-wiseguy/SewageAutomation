@@ -43,7 +43,7 @@ skip_before_action :verify_authenticity_token
  def process
   percent=((@treatment_plant.capacity-@treatment_plant.volume)/@treatment_plant.capacity).to_f
   percent=percent*100
-  if(percent>90) then
+  if(percent>=90) then
     @treatment_plant.update(alert: true)
     reservoir()
   end
