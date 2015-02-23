@@ -23,4 +23,48 @@ Pumping Stations :
 
 <% end %>
 
+
 </table>
+<div id="container" style=" width:600px; height:600px; ">
+</div>
+
+<%= javascript_tag do -%>
+$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Amount of water'
+        },
+        xAxis: {
+            categories: ['Sewage treatment plant'
+<% treatment_plant.pumping_stations.each do |p| %>
+,'Station <%= p.id %>'
+<% end %>
+
+]
+        },
+        yAxis: {
+            title: {
+                text: 'Volume'
+            },
+            tickInterval: 10,
+            tickAmount: 11
+        },
+        legend: {
+                labelFormat: "cu. m"
+        },
+        series: [{
+            name: '<%= treatment_plant.id %>',
+            data: [<%= ((treatment_plant.volume*100)/treatment_plant.capacity).to_i %>
+<% treatment_plant.pumping_stations.each do |p| %>
+,<%= ((p.volume*100)/p.capacity).to_i %>
+<% end %>
+ ]
+        }]
+    });
+})
+
+<% end -%>
+

@@ -1,6 +1,17 @@
-<h1> All the Sewage Treatments plants </h1>
+<ul class="nav nav-tabs" id="homepagetabs">
+ <li class="active"><%= link_to "Treatment plant", "#treatmentplant", {"data-target"=> "#treatmentplant", "data-toggle"=> "tab"} %></li>
+ <li><%= link_to "Manholes", "#manholesensors", {"data-target"=> "#manholesensors", "data-toggle"=> "tab"} %></li>
+</ul>
 
-<% @treatment_plants.each do |plant| %>
- <%= link_to "Plant #{plant.id}" ,treatment_plant_path(plant) %>
- <%# render @treatment_plants %>
-<% end %>
+<div class="tab-content active">
+ <div id="treatmentplant" class="tab-pane">
+  <h1> All the Sewage Treatments plants </h1>
+  <%= render @treatment_plants %>
+
+ </div>
+
+ <div id="manholesensors" class="tab-pane">
+  <h1>Sensors graphs</h1>
+ </div>
+
+</div>

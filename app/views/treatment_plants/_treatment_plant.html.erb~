@@ -7,11 +7,10 @@ Alert : <%= str %>
 <br>
 Pumping Stations :
 <table border="2">
- <tr> <th>belongs to </th><th> ID</th> <th>Capacity</th> <th>Volume</th> <th>Location</th> <th>Priority</th> <th>Outlet Valve</th> <th>Second valve </th> <th>Alert</th> </tr>
+ <tr> <th> ID</th> <th>Capacity</th> <th>Volume</th> <th>Location</th> <th>Priority</th> <th>Outlet Valve</th> <th>Second valve </th> <th>Alert</th> </tr>
 <% treatment_plant.pumping_stations.each do |p| %>
 <% if p.alert then str="ON" else str="OFF" end %>
 <tr>
- <td><%= p.treatment_plant_id %>
  <td><%= p.id %> </td>
  <td><%= p.capacity %> </td>
  <td><%= p.volume %> </td>
@@ -24,4 +23,48 @@ Pumping Stations :
 
 <% end %>
 
+
 </table>
+<div id="container" style=" width:600px; height:600px; ">
+</div>
+
+<%= javascript_tag do -%>
+$(function () { 
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Amount of water'
+        },
+        xAxis: {
+            categories: ['Sewage treatment plant'
+<% treatment_plant.pumping_stations.each do |p| %>
+,'Station <%= p.id %>'
+<% end %>
+
+]
+        },
+        yAxis: {
+            title: {
+                text: 'Volume'
+            },
+            tickInterval: 10,
+            tickPixelInterval: 40
+        },
+        legend: {
+                labelFormat: "cu. m"
+        },
+        series: [{
+            name: '<%= treatment_plant.id %>',
+            data: [<%= ((treatment_plant.volume*100)/treatment_plant.capacity).to_i %>
+<% treatment_plant.pumping_stations.each do |p| %>
+,<%= ((p.volume*100)/p.capacity).to_i %>
+<% end %>
+ ]
+        }]
+    });
+})
+
+<% end -%>
+
