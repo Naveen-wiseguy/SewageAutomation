@@ -1,0 +1,1 @@
+$('#content').replaceWith("<%= escape_javascript(render @treatment_plants) %>");
