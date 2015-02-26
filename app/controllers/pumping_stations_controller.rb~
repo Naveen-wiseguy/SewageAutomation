@@ -21,8 +21,9 @@ skip_before_action :verify_authenticity_token
     if request.put? then
 	#inputPath=params[:file].path
 	CSV.parse(request.raw_post()) do |row|
+	  ht=24
 	  @pumping_station=PumpingStation.find(row[0].to_i)
-	  @pumping_station.update(volume: row[1].to_i)
+	  @pumping_station.update(volume: ((ht-row[1].to_i)*3.14*12.5*12.5).to_i)
 	  m=processing
 	  render text: "OK\n#{@pumping_station.valve_open}\n#{@pumping_station.second_valve_open}\n#{m}"
 	end
@@ -47,8 +48,8 @@ skip_before_action :verify_authenticity_token
        if @pumping_station.second_valve_open
          @pumping_station.update(second_valve_open: false)
      end
-     max=0
-     max_id=5
+     max=-500
+     max_id=0
      @treatment_plant.pumping_stations.each do |station|
        pri=station.priority*2-(station.capacity-station.volume)
        if pri>max then
@@ -58,8 +59,12 @@ skip_before_action :verify_authenticity_token
      end
      @treatment_plant.pumping_stations.each do |station|
       # pri=station.priority*2-(station.capacity-station.volume)
-       if station.id==max_id
-        station.update(valve_open: true)
+       if station.id==max_id then
+	percent=((@pumping_station.capacity-@pumping_station.volume)/@pumping_station.capacity).to_f
+	percent=percent*100
+	if percent>=30
+         station.update(valve_open: true)
+	end
        else
         station.update(valve_open: false)
       end

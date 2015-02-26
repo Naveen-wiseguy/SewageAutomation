@@ -29,7 +29,7 @@ Pumping Stations :
 </div>
 
 <%= javascript_tag do -%>
-$(function () { 
+function chart() { 
     $('#container').highcharts({
         chart: {
             type: 'bar'
@@ -50,7 +50,7 @@ $(function () {
                 text: 'Volume'
             },
             tickInterval: 10,
-            tickPixelInterval: 40
+            tickAmount: 11
         },
         legend: {
                 labelFormat: "cu. m"
@@ -64,7 +64,10 @@ $(function () {
  ]
         }]
     });
-})
+}
+
+$(document).ready(function(){	chart();	});
+$(document).ajaxComplete(function(){	chart();	});
 
 <% end -%>
 

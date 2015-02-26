@@ -14,16 +14,42 @@
  </div>
 
  <div id="manholesensors" class="tab-pane">
-  <h1>Sensors graphs</h1>
+  <h1>Manhole Sensors</h1>
+  <canvas id="sensor" width="800" height="450">
+  </canvas>
  </div>
 
 </div>
 
 <script type="text/javascript">
 $(document).ready( function(){
+ setup();
  setInterval(function(){
 	$("#index").load("/treatment_plants #index");
-},2000 );
+},10000 );
 }
 );
+
+function setup()
+{
+var radius=20;
+var canvas=document.getElementById("sensor");
+var ctx=canvas.getContext('2d');
+ctx.fillStyle="#0000FF";
+ctx.beginPath();
+ctx.arc(30,30,radius,0,2*Math.PI);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(180,50,radius,0,2*Math.PI);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(300,100,radius,0,2*Math.PI);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(130,230,radius,0,2*Math.PI);
+ctx.fill();
+ctx.beginPath();
+ctx.arc(680,330,radius,0,2*Math.PI);
+ctx.fill();
+}
 </script>

@@ -18,6 +18,7 @@ root 'treatment_plants#index'
 
 put '/treatment_plants' => 'treatment_plants#update'
 put '/pumping_stations' => 'pumping_stations#update'
+put '/manhole_sensors' => 'manhole_sensors#update'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

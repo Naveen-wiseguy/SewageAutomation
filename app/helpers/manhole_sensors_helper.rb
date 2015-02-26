@@ -1,0 +1,2 @@
+module ManholeSensorsHelper
+end

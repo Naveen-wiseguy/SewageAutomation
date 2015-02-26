@@ -29,7 +29,7 @@ Pumping Stations :
 </div>
 
 <%= javascript_tag do -%>
-$(function () { 
+function chart() { 
     $('#container').highcharts({
         chart: {
             type: 'bar'
@@ -53,7 +53,7 @@ $(function () {
             tickAmount: 11
         },
         legend: {
-                labelFormat: "cu. m"
+                labelFormat: "%"
         },
         series: [{
             name: '<%= treatment_plant.id %>',
@@ -64,7 +64,10 @@ $(function () {
  ]
         }]
     });
-})
+}
+
+$(document).ready(function(){	chart();	});
+$(document).ajaxComplete(function(){	chart();	});
 
 <% end -%>
 

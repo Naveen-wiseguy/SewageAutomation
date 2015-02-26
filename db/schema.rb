@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218180931) do
+ActiveRecord::Schema.define(version: 20150226112139) do
+
+  create_table "manhole_sensors", force: true do |t|
+    t.string   "location"
+    t.integer  "limit"
+    t.boolean  "alert"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pumping_stations", force: true do |t|
     t.integer  "volume"
